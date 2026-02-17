@@ -1,0 +1,366 @@
+mixed-port: 7890
+allow-lan: true
+bind-address: "*"
+lan-allowed-ips:
+  - 127.0.0.0/8
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+  - ::1/128
+  - fc00::/7
+tcp-concurrent: true
+enable-process: true
+find-process-mode: always
+mode: rule
+geodata-mode: true
+log-level: info
+ipv6: false
+keep-alive-interval: 30
+unified-delay: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+ntp:
+  enable: true
+  server: time.apple.com
+  port: 123
+  interval: 30
+  write-to-system: true
+
+sniffer:
+  enable: true
+  override-destination: true
+  parse-pure-ip: false
+  force-dns-mapping: true
+  sniff:
+    QUIC:
+      ports:
+      - 443
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssott.com"
+  skip-domain:
+  - "+.apple.com"
+  - Mijia Cloud
+  - dlg.io.mi.com
+  - "+.oray.com"
+  - "+.sunlogin.net"
+  - "+.push.apple.com"
+  skip-dst-address:
+  - 0.0.0.0/8
+  - 10.0.0.0/8
+  - 100.64.0.0/10
+  - 127.0.0.0/8
+  - 169.254.0.0/16
+  - 172.16.0.0/12
+  - 192.0.0.0/24
+  - 192.0.2.0/24
+  - 192.88.99.0/24
+  - 192.168.0.0/16
+  - 198.51.100.0/24
+  - 203.0.113.0/24
+  - 224.0.0.0/3
+  - ::/127
+  - fc00::/7
+  - fe80::/10
+  - ff00::/8
+
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  strict-route: true
+  route-exclude-address:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/3
+    - ::/127
+    - fc00::/7
+    - fe80::/10
+    - ff00::/8
+
+dns:
+  enable: true
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  respect-rules: true
+  fake-ip-filter-mode: blacklist
+  default-nameserver:
+    - https://8.8.8.8/dns-query#disable-ipv6=true
+  proxy-server-nameserver:
+    - https://8.8.8.8/dns-query#disable-ipv6=true
+  direct-nameserver:
+    - https://77.88.8.8/dns-query#DIRECT
+  nameserver:
+    - https://dns.google/dns-query#disable-ipv6=true
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.local"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.home.arpa"
+  - "*.direct"
+  - cable.auth.com
+  - network-test.debian.org
+  - detectportal.firefox.com
+  - resolver1.opendns.com
+  - time.*.com
+  - time.*.gov
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "+.pool.ntp.org"
+  - proxy.golang.org
+  - "+.pub.3gppnetwork.org"
+  - "+.bftcom.com"
+  - "+.noytech.com"
+  - "+.vlessvova.ru"
+  - "+.zbs.ninja"
+  - "+.darkvpn.net"
+  - "+.icona.one"
+  - "+.beardman.trade"
+  - "+.dynamo.vision"
+
+proxies:
+- {name: "DNS-OUT", type: dns}
+
+proxy-anchor:
+  uurl:     &uurl     {url: 'http://www.gstatic.com/generate_204'}
+  uurltest: &uurltest {interval: 100, tolerance: 50, lazy: false}
+  urltest:  &urltest  {type: url-test, <<: [*uurltest, *uurl]}
+  select:   &select   {type: select,   <<: [*uurltest, *uurl]}
+  balance:  &balance  {type: load-balance, <<: [*uurltest, *uurl], strategy: consistent-hashing}
+  remna:    &remna    {remnawave: {include-proxies: true}}
+
+  proxies-ad: &proxies-ad {proxies: ["⁖ Automatic", "Direct"]}
+  proxies-da: &proxies-da {proxies: ["Direct", "⁖ Automatic"]}
+
+  icon-Automatic: &icon-Automatic {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png}
+  icon-Fallback:  &icon-Fallback  {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png}
+  icon-AntiMAX:   &icon-AntiMAX   {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png}
+  icon-Russia:    &icon-Russia    {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Russia.png}
+  icon-Stocks:    &icon-Stocks    {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/Bitcoin_Icon.png}
+  icon-AdBlock:   &icon-AdBlock   {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pirate_Nation.png}
+  icon-Direct:    &icon-Direct    {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png}
+  icon-Block:     &icon-Block     {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Reject.png}
+
+proxy-groups:
+- {name: "Direct", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [DIRECT]}
+- {name: "Block",  <<: *icon-Block,  type: select, hidden: true, proxies: [REJECT]}
+
+- {name: "⁖ Automatic", <<: [*icon-Automatic, *urltest, *remna]}
+- {name: "AntiMAX",     <<: [*icon-AntiMAX,   *urltest, *remna]}
+
+- {name: "Russia", <<: [*icon-Russia, *select], proxies: [Direct]}
+
+- {name: "⌇ Stocks", <<: [*icon-Stocks, *select, *proxies-da, *remna]}
+
+- {name: "⠆ AdBlock", <<: *icon-AdBlock, type: select, proxies: ["Block", "⁖ Automatic", "Direct"]}
+- {name: "GLOBAL",  <<: *remna, type: select, udp: true, exclude-filter: "(?i)Direct|Reject", proxies: ["⁖ Automatic"]}
+- {name: "⠇ Fallback", <<: [*icon-Fallback, *proxies-ad, *remna], type: fallback}
+
+rule-universal-definition:
+  universal-config: &universal {type: http, interval: 86400}
+
+  domain: &domain {behavior: domain, format: yaml, <<: *universal}
+  ipcidr: &ipcidr {behavior: ipcidr, format: yaml, <<: *universal}
+  classical: &classical {behavior: classical, format: yaml, <<: *universal}
+  yaml: &yaml {behavior: domain, format: yaml, <<: *universal}
+
+geox-url:
+  geoip:   "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb:    "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+
+rule-providers:
+  geoip-private:
+    <<: *ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.yaml"
+  private:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml"
+
+  geoip-telegram:
+    <<: *ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml"
+  telegram:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml"
+
+  whatsapp:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.yaml"
+
+  geoip-discord:
+    <<: *classical
+    url: "https://raw.githubusercontent.com/fildunsky/clash_discord/refs/heads/main/discord-ip.yaml"
+  discord:
+    <<: *classical
+    url: "https://raw.githubusercontent.com/fildunsky/clash_discord/refs/heads/main/discord-domain.yaml"
+
+  meta:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.yaml"
+  
+  geoip-ru:
+    <<: *ipcidr
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/ru.yaml"
+  category-gov-ru:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-gov-ru.yaml"
+  category-ru:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ru.yaml"
+
+  category-ads-all:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.yaml"
+
+  stocks:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/K1LLSCRIPT/rulesets/main/clash/stocks.yaml"
+    ## можно создать на гитхабе такие же свои файлы по образу и подобию, и вставить свои ссылки
+    ## пример: https://github.com/K1LLSCRIPT/rulesets/blob/main/clash/stocks.yaml
+
+
+rules:
+- DST-PORT,53,DNS-OUT
+
+- DOMAIN-REGEX,.*2ip.*.ru,Direct
+- DOMAIN-REGEX,.*2ip.*.io,⁖ Automatic
+
+- RULE-SET,geoip-private,Direct
+- RULE-SET,private,Direct
+- DOMAIN-REGEX,.*syng.*,Direct
+- DOMAIN-REGEX,.*icona.*,Direct
+- DOMAIN-REGEX,.*eee.bi.*,Direct
+- DOMAIN-REGEX,.*darkvpn.*,Direct
+- DOMAIN-REGEX,.*zbs.*.ninja,Direct
+- DOMAIN-REGEX,.*vlessvova.*.ru,Direct
+- DOMAIN-REGEX,.*dynamo.*.vision,Direct
+- DOMAIN-REGEX,.*beardman.*.trade,Direct
+
+# STUN
+- AND,((NETWORK,UDP),(DOMAIN-REGEX,.*signaler.*)),AntiMAX
+- AND,((NETWORK,UDP),(DOMAIN-REGEX,.*stun.*)),AntiMAX
+- AND,((NETWORK,UDP),(RULE-SET,geoip-telegram)),AntiMAX
+- AND,((NETWORK,UDP),(RULE-SET,telegram)),AntiMAX
+- AND,((NETWORK,UDP),(RULE-SET,whatsapp)),AntiMAX
+- AND,((NETWORK,UDP),(RULE-SET,meta)),AntiMAX
+
+# browserleaks.com
+- DOMAIN-REGEX,.*leak.*,AntiMAX
+# QUIC test
+- DOMAIN-REGEX,.*nginx.org,AntiMAX
+# Telegram
+- RULE-SET,geoip-telegram,AntiMAX
+- RULE-SET,telegram,AntiMAX
+# Whatsapp
+- RULE-SET,whatsapp,AntiMAX
+- RULE-SET,meta,AntiMAX
+
+# Blocked in rf
+- DOMAIN-REGEX,.*4pda.*,⁖ Automatic
+- DOMAIN-REGEX,.*habr.*,⁖ Automatic
+- DOMAIN-REGEX,.*canal.*,⁖ Automatic
+- DOMAIN-REGEX,.*pastebin.*,⁖ Automatic
+- DOMAIN-REGEX,.*rutracker.*,⁖ Automatic
+- DOMAIN-REGEX,.*bestchange.*,⁖ Automatic
+- DOMAIN-REGEX,.*yourok.*,⁖ Automatic
+- DOMAIN-REGEX,.*torrs.*,⁖ Automatic
+
+
+- GEOIP,RU,Russia
+- RULE-SET,geoip-ru,Russia
+- RULE-SET,category-gov-ru,Russia
+- RULE-SET,category-ru,Russia
+
+- DOMAIN-KEYWORD,alfacrm,Russia
+- DOMAIN-KEYWORD,shakasports,Russia
+- DOMAIN-KEYWORD,letovokids,Russia
+
+- DOMAIN-KEYWORD,apple,Russia
+- DOMAIN-KEYWORD,avito,Russia
+- DOMAIN-KEYWORD,indels,Russia
+- DOMAIN-KEYWORD,yandex,Russia
+- DOMAIN-KEYWORD,icloud,Russia
+- DOMAIN-KEYWORD,reddit,Russia
+- DOMAIN-KEYWORD,noytech,Russia
+- DOMAIN-KEYWORD,anydesk,Russia
+- DOMAIN-KEYWORD,ntvplus,Russia
+- DOMAIN-KEYWORD,keenetic,Russia
+- DOMAIN-KEYWORD,lgwebostv,Russia
+- DOMAIN-KEYWORD,argotunnel,Russia
+- DOMAIN-KEYWORD,onetwotrip,Russia
+- DOMAIN-KEYWORD,amediateka,Russia
+
+- DOMAIN-REGEX,.*ivi.*,Russia
+- DOMAIN-REGEX,.*wink.*,Russia
+- DOMAIN-REGEX,.*24.*.tv,Russia
+- DOMAIN-REGEX,.*imshop.*,Russia
+- DOMAIN-REGEX,.*ngenix.*,Russia
+- DOMAIN-REGEX,.*kartina.*,Russia
+- DOMAIN-REGEX,.*okko.*.tv,Russia
+- DOMAIN-REGEX,.*samsung.*,Russia
+- DOMAIN-REGEX,.*lge.*.com,Russia
+- DOMAIN-REGEX,.*ssl-stat.*,Russia
+- DOMAIN-REGEX,.*jumpdesktop.*,Russia
+- DOMAIN-REGEX,.*teleport.*.media,Russia
+- DOMAIN-REGEX,.*restream-media.*,Russia
+
+# QUIC
+- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+
+- RULE-SET,stocks,⌇ Stocks
+
+# AdBlock
+- RULE-SET,category-ads-all,⠆ AdBlock
+
+# FINAL
+- MATCH,⠇ Fallback
