@@ -1,0 +1,22 @@
+# NAME: BlockedInRF
+# AUTHOR: K1LLSCRIPT
+# REPO: https://github.com/K1LLSCRIPT/rulesets
+# UPDATED: 26-03-2026 04:00:00
+# DOMAIN: 0
+# DOMAIN-KEYWORD: 1
+# DOMAIN-SUFFIX: 1
+# DOMAIN-REGEX: 8
+# IP-ASN: 1
+# IP-CIDR: 2
+# TOTAL: 35
+payload:
+  - DOMAIN-REGEX,.*4pda.*
+  - DOMAIN-REGEX,.*habr.*
+  - DOMAIN-REGEX,.*canal.*
+  - DOMAIN-REGEX,.*pastebin.*
+  - DOMAIN-REGEX,.*rutracker.*
+  - DOMAIN-REGEX,.*bestchange.*
+  - DOMAIN-REGEX,.*yourok.*
+  - DOMAIN-REGEX,.*torrs.*
+  - DOMAIN-SUFFIX,habr.com
+  - DOMAIN-KEYWORD,bedolagam
