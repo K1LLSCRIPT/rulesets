@@ -1,2 +1,4 @@
 payload:
-    - DOMAIN-REGEX,.*blzprofile
+    - DOMAIN-REGEX,.*blzprofile.*
+    - DOMAIN-REGEX,.*blzstatic.*
+    - DOMAIN-REGEX,.*battle.net.*
