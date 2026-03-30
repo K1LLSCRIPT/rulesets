@@ -2,3 +2,5 @@ payload:
     - DOMAIN-REGEX,.*blzprofile.*
     - DOMAIN-REGEX,.*blzstatic.*
     - DOMAIN-REGEX,.*battle.net.*
+    - DOMAIN-REGEX,.*blz.*akamai.*
+    - DOMAIN-REGEX,.*bnet.*akamai.*
