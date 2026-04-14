@@ -18,5 +18,5 @@ payload:
   - DOMAIN-REGEX,.*bestchange.*
   - DOMAIN-REGEX,.*yourok.*
   - DOMAIN-REGEX,.*torrs.*
-  - DOMAIN-SUFFIX,habr.com
+  - DOMAIN-REGEX,.*happ.*
   - DOMAIN-KEYWORD,bedolagam
