@@ -95,6 +95,8 @@ $TUN_IN_AUTOCONFIG
 proxy-providers:
 $PROVIDERS_BLOCK
 
+providers_list: &providers_list
+$PROVIDERS_LIST
 
 proxy-anchor:
   uurl: &uurl {url: 'http://www.gstatic.com/generate_204'}
@@ -103,8 +105,7 @@ proxy-anchor:
   select:   &select   {type: select,   <<: [*uurltest, *uurl]}
   balance:  &balance  {type: load-balance, <<: [*uurltest, *uurl], strategy: consistent-hashing}
 
-  providers_list: &providers_list
-  $PROVIDERS_LIST
+
 
   exclude_ru: &exclude_ru "(?i)🇷🇺|RU"
 
