@@ -158,23 +158,6 @@ listeners:
 $TUN_IN_AUTOCONFIG    # inbound name: tun-in (для автонастройки более производительного варианта tproxy на поддерживаемом оборудовании)
 
 
-listeners:
-  - name: tun-in
-    type: tun
-    stack: system
-    dns-hijack:
-    - 0.0.0.0:53
-    auto-detect-interface: false
-    include-interface:
-      - $(first_iface)
-    auto-route: true
-    strict-route: true
-    auto-redirect: true
-    inet4-address:
-    - 198.19.0.1/30
-    udp-timeout: 30
-    mtu: 1500
-
     
 # ============================================================================
 # === ПОДПИСКИ НА ПРОКСИ (PROXY PROVIDERS) ===
