@@ -157,8 +157,9 @@ proxy-anchor:
     
 proxy-groups:
 - {name: "Direct", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [DIRECT]}
+- {name: "Pass", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [PASS]}
 - {name: "Block",  <<: *icon-Block,  type: select, hidden: true, proxies: [REJECT]}
-- {name: QUIC, type: select, proxies: [PASS, REJECT]}
+- {name: "QUIC", type: select, proxies: [Pass, Block]}
 
 - {name: "Moscow", <<: [*icon-Russia, *select, *filter-rus], hidden: true, include-all: true}
 
