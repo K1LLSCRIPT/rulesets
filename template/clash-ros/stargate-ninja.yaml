@@ -163,7 +163,7 @@ proxy-groups:
 #- {name: "Europe", <<: *icon-Europe, proxies: [🇪🇺 Auto], <<: *select, <<: *filter-eur}
 #- {name: "🇺🇸 Auto", hidden: true, <<: *balance, <<: *filter-usa}
 #- {name: "USA", <<: *icon-USA, proxies: [🇺🇸 Auto], <<: *select, <<: *filter-usa}
-- {name: "UAE", <<: [*icon-UAE, *select, *filter-uae], include-all: true}
+#- {name: "UAE", <<: [*icon-UAE, *select, *filter-uae], include-all: true}
 
 - {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-ad, *filter-wrp], include-all: true}
 - {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true}
