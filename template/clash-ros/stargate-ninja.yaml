@@ -415,8 +415,8 @@ rules:
 - DOMAIN-REGEX,.*beardman.*.trade,Direct
 
 ## QUIC
-- AND,((NETWORK,udp),(DST-PORT,443)),QUIC
-#- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+#- AND,((NETWORK,udp),(DST-PORT,443)),QUIC
+- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
 
 # STUN
 - AND,((NETWORK,UDP),(RULE-SET,microsoft)),⌇ Microsoft
