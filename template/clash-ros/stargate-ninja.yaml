@@ -1,5 +1,4 @@
 mode: Rule
-port: 7890
 profile: {store-selected: true}
 unified-delay: true
 allow-lan: true
@@ -109,18 +108,15 @@ proxy-anchor:
   filter-wrp: &filter-wrp {filter: "(?i)🇳🇵"}
   filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵"}
   filter-usa: &filter-usa {filter: "(?i)🇺🇸|🇳🇵"}
-  filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|"}
-  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇦🇪|🇳🇵"}
+  filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮"}
+  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
+
   proxies-di:  &proxies-di  {proxies: [Direct]}
   proxies-fb:  &proxies-fb  {proxies: [⁖ Automatic, Direct]}
 
-#  proxies-ad:  &proxies-ad  {proxies: [⁖ Automatic, Direct, Europe, USA]}
-#  proxies-adr: &proxies-adr {proxies: [⁖ Automatic, Direct, Europe, USA, Russia]}
-#  proxies-dar: &proxies-dar {proxies: [Direct, ⁖ Automatic, Europe, USA, Russia]}
-
-  proxies-ad:  &proxies-ad  {proxies: [⁖ Automatic, Direct, UAE, Europe, USA]}
-  proxies-adr: &proxies-adr {proxies: [⁖ Automatic, Direct, UAE, Europe, USA, Russia]}
-  proxies-dar: &proxies-dar {proxies: [Direct, ⁖ Automatic, UAE, Europe, USA, Russia]}
+  proxies-ad:  &proxies-ad  {proxies: [⁖ Automatic, Direct, Europe, USA]}
+  proxies-adr: &proxies-adr {proxies: [⁖ Automatic, Direct, Europe, USA, Russia]}
+  proxies-dar: &proxies-dar {proxies: [Direct, ⁖ Automatic, Europe, USA, Russia]}
 
   icon-Automatic: &icon-Automatic {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png}
   icon-Fallback: &icon-Fallback {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png}
@@ -169,9 +165,8 @@ proxy-groups:
 #- {name: "USA", <<: *icon-USA, proxies: [🇺🇸 Auto], <<: *select, <<: *filter-usa}
 - {name: "UAE", <<: [*icon-UAE, *select, *filter-uae], include-all: true}
 
-#- {name: "⌇ Speedtest", <<: *icon-Speedtest, <<: *select, <<: *proxies-ad, include-all: true, <<: *filter-wrp}
+- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-ad, *filter-wrp], include-all: true}
 - {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true}
-- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select,  *proxies-ad, *filter-spd], include-all: true}
 - {name: "⌇ Social Networks", <<: [*icon-Social, *select, *proxies-adr, *filter-wrp],include-all: true}
 - {name: "⌇ Google", <<: [*icon-Google, *select, *proxies-adr, *filter-ruw], include-all: true}
 - {name: "⌇ YouTube", <<: [*icon-YouTube, *select, *proxies-adr, *filter-ruw], include-all: true}
@@ -375,16 +370,16 @@ rule-providers:
     url: "https://raw.githubusercontent.com/K1LLSCRIPT/rulesets/main/clash/stocks.yaml"
 
 rules:
-#- IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
-#- IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
-#- IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
-#- IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
-#- IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
-#- IP-CIDR,192.88.99.0/24,DIRECT,no-resolve
-#- IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
-#- IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
-#- DOMAIN-SUFFIX,local,DIRECT
-#- DOMAIN-SUFFIX,lan,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+- IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+- IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+- IP-CIDR,192.88.99.0/24,DIRECT,no-resolve
+- IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+- IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
+- DOMAIN-SUFFIX,local,DIRECT
+- DOMAIN-SUFFIX,lan,DIRECT
 
 - DOMAIN-REGEX,.*2ip.*.ru,Direct
 #- DOMAIN-REGEX,.*2ip.*.io,🚀 Select
@@ -423,9 +418,9 @@ rules:
 - AND,((NETWORK,UDP),(RULE-SET,whatsapp)),AntiMAX
 - AND,((NETWORK,UDP),(RULE-SET,meta)),AntiMAX
 
-- OR,((RULE-SET,telegram-domains),(RULE-SET,telegram-ips)),AntiMAX
-- OR,((RULE-SET,whatsapp-domains),(RULE-SET,whatsapp-ips)),AntiMAX
-- OR,((RULE-SET,discord-domains),(RULE-SET,discord-voiceips)),AntiMAX
+- OR,((RULE-SET,telegram),(RULE-SET,geoip-telegram)),AntiMAX
+- OR,((RULE-SET,whatsapp),(RULE-SET,geoip-whatsapp)),AntiMAX
+- OR,((RULE-SET,discord),(RULE-SET,geoip-discord)),AntiMAX
 
 - OR,((DST-PORT,596-599),(DST-PORT,1400),(DST-PORT,3478-3480),(DST-PORT,4379-4380),(DST-PORT,5222),(DST-PORT,5223),(DST-PORT,5228),(DST-PORT,5242),(DST-PORT,6250),(DST-PORT,12000-65535),(DST-PORT,27101-65535),(DST-PORT,45395),(DST-PORT,50318),(DST-PORT,59234)),⌇ Voice Ports
 
