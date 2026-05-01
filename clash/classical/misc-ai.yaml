@@ -1,0 +1,38 @@
+# NAME: misc-ai.
+# AUTHOR: K1LLSCRIPT
+# REPO: https://github.com/K1LLSCRIPT/rulesets
+# UPDATED: 01-05-2026 03:38:00
+# DOMAIN: 0
+# DOMAIN-KEYWORD: 3
+# DOMAIN-SUFFIX: 19
+# DOMAIN-REGEX: 0
+# IP-ASN: 0
+# IP-CIDR: 0
+# TOTAL: 35
+payload:
+    # xAI (Grok)
+  - DOMAIN-SUFFIX,x.ai
+  - DOMAIN-SUFFIX,grok.x.ai
+  - DOMAIN-SUFFIX,api.x.ai
+  - DOMAIN-KEYWORD,grok
+    # Hugging Face
+  - DOMAIN-SUFFIX,huggingface.co
+  - DOMAIN-SUFFIX,hf.co
+  - DOMAIN-SUFFIX,hf.space
+  - DOMAIN-SUFFIX,huggingface.com
+  - DOMAIN-KEYWORD,huggingface
+    # Midjourney, etc
+  - DOMAIN-SUFFIX,midjourney.com
+  - DOMAIN-SUFFIX,cdn.midjourney.com
+  - DOMAIN-KEYWORD,midjourney
+  - DOMAIN-SUFFIX,stability.ai
+  - DOMAIN-SUFFIX,stablediffusionweb.com
+  - DOMAIN-SUFFIX,dreamstudio.ai
+  - DOMAIN-SUFFIX,runwayml.com
+  - DOMAIN-SUFFIX,runway.ml
+    # Character.AI, etc
+  - DOMAIN-SUFFIX,character.ai
+  - DOMAIN-SUFFIX,beta.character.ai
+  - DOMAIN-SUFFIX,replicate.com
+  - DOMAIN-SUFFIX,cohere.ai
+  - DOMAIN-SUFFIX,cohere.com
