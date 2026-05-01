@@ -103,6 +103,12 @@ proxy-anchor:
   select:   &select   {type: select,   <<: [*uurltest, *uurl]}
   balance:  &balance  {type: load-balance, <<: [*uurltest, *uurl], strategy: consistent-hashing}
 
+  providers_list: &providers_list
+  $PROVIDERS_LIST
+
+  exclude_ru: &exclude_ru "(?i)🇷🇺|RU"
+
+
   filter-rus: &filter-rus {filter: "(?i)🇷🇺"}
   filter-uae: &filter-uae {filter: "(?i)🇦🇪"}
   filter-wrp: &filter-wrp {filter: "(?i)🇳🇵"}
@@ -142,6 +148,12 @@ proxy-anchor:
   icon-Block: &icon-Block {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Reject.png}
   icon-Puzzle: &icon-Puzzle {icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Puzzle.png}
 
+
+
+#    use: *providers_list
+#    exclude-filter: *exclude_ru
+
+    
 proxy-groups:
 - {name: "Direct", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [DIRECT]}
 - {name: "Block",  <<: *icon-Block,  type: select, hidden: true, proxies: [REJECT]}
@@ -157,7 +169,7 @@ proxy-groups:
 - {name: "Russia", <<: [*icon-Russia, *select,  *filter-rus], include-all: true, proxies: [Direct]}
 #- {name: "Russia", <<: *icon-Russia, <<: *select,  include-all: true, <<: *filter-rus, proxies: [Direct]}
 - {name: "Europe", <<: [*icon-Europe, *balance, *filter-eur], include-all: true}
-- {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], include-all: true}
+- {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], use: *providers_list}
 
 #- {name: "🇪🇺 Auto", hidden: true, <<: *balance, <<: *filter-eur}
 #- {name: "Europe", <<: *icon-Europe, proxies: [🇪🇺 Auto], <<: *select, <<: *filter-eur}
