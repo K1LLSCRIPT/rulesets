@@ -149,12 +149,7 @@ proxy-anchor:
   icon-Block: &icon-Block {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Reject.png}
   icon-Puzzle: &icon-Puzzle {icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Puzzle.png}
 
-
-
-#    use: *providers_list
-#    exclude-filter: *exclude_ru
-
-    
+ 
 proxy-groups:
 - {name: "Direct", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [DIRECT]}
 - {name: "Pass", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [PASS]}
@@ -162,22 +157,11 @@ proxy-groups:
 - {name: "QUIC", type: select, proxies: [Pass, Block]}
 
 - {name: "Moscow", <<: [*icon-Russia, *select, *filter-rus], hidden: true, include-all: true}
-
 - {name: "⁖ Automatic", <<: [*icon-Automatic, *urltest, *filter-all], include-all: true}
-
 - {name: "AntiMAX", <<: [*icon-AntiMAX, *urltest, *filter-all], include-all: true}
-#- {name: "AntiMAX", <<: *icon-AntiMAX, <<: *urltest, include-all: true, <<: *filter-all}
-
 - {name: "Russia", <<: [*icon-Russia, *select,  *filter-rus], include-all: true, proxies: [Direct]}
-#- {name: "Russia", <<: *icon-Russia, <<: *select,  include-all: true, <<: *filter-rus, proxies: [Direct]}
 - {name: "Europe", <<: [*icon-Europe, *balance, *filter-eur], include-all: true}
 - {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], use: *providers_list}
-
-#- {name: "🇪🇺 Auto", hidden: true, <<: *balance, <<: *filter-eur}
-#- {name: "Europe", <<: *icon-Europe, proxies: [🇪🇺 Auto], <<: *select, <<: *filter-eur}
-#- {name: "🇺🇸 Auto", hidden: true, <<: *balance, <<: *filter-usa}
-#- {name: "USA", <<: *icon-USA, proxies: [🇺🇸 Auto], <<: *select, <<: *filter-usa}
-#- {name: "UAE", <<: [*icon-UAE, *select, *filter-uae], include-all: true}
 
 - {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-ad, *filter-wrp], include-all: true}
 - {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true}
@@ -216,11 +200,6 @@ geox-url:
   geoip: "https://github.com/jameszeroX/zkeen-ip/releases/latest/download/zkeenip.dat"
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
-#geox-url:
-#  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-#  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-#  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
-
 rule-providers:
 
   blocked_in_rf:
@@ -239,34 +218,15 @@ rule-providers:
   telegram:
     <<: *domain_mrs
     url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"
-
   geoip-telegram:
     <<: *ipcidr
     url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml"
-
   whatsapp:
     <<: *domain_mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs"
-
   geoip-whatsapp:
     <<: *ipcidr
     url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/whatsapp-ips.yaml"
-
-
-#  geoip-telegram:
-#    <<: *ipcidr
-#    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml"
-#  telegram:
-#    <<: *domain
-#    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml"
-
-#  whatsapp:
-#    <<: *domain
-#    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.yaml"
-
-#  whatsapp:
-#    <<: *classical
-#    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Whatsapp/Whatsapp.yaml"
 
   geoip-discord:
     <<: *classical
@@ -359,13 +319,6 @@ rule-providers:
   openai:
     <<: *domain_mrs
     url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs"
-
-#  openai:
-#    <<: *classical
-#    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OpenAI/OpenAI.yaml"
-#  gemini:
-#    <<: *classical
-#    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml"
 
   microsoft:
     <<: *domain
