@@ -20,7 +20,7 @@ sniffer:
     TLS:
       ports: [443, 8443, 7443]
     QUIC:
-      ports: [443, 8443]
+      ports: [443, 8443, 7443]
 
 dns:
   enable: $DNS_ENABLE
@@ -370,6 +370,7 @@ rules:
 ## QUIC
 - AND,((NETWORK,udp),(DST-PORT,443)),QUIC
 #- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+- DST-PORT,7443,Direct
 
 # STUN
 - AND,((NETWORK,UDP),(RULE-SET,microsoft)),⌇ Microsoft
