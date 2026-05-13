@@ -99,7 +99,7 @@ providers_list: &providers_list
 $PROVIDERS_LIST
 
 proxy-anchor:
-  uurl: &uurl {url: 'http://www.gstatic.com/generate_204'}
+  uurl: &uurl {url: 'https://gstatic.com/generate_204'}
   uurltest: &uurltest {interval: 100, tolerance: 50, lazy: false}
   urltest:  &urltest  {type: url-test, <<: [*uurltest, *uurl]}
   select:   &select   {type: select,   <<: [*uurltest, *uurl]}
