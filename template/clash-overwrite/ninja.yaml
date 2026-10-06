@@ -87,7 +87,7 @@ proxy-groups:
 - {name: "Europe", <<: [*icon-Europe, *balance, *filter-eur], include-all: true, use: [Provider_01, Provider_02]}
 - {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], include-all: true, use: [Provider_01, Provider_02]}
 
-- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-ad, *filter-wrp], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
 - {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true, use: [Provider_01, Provider_02]}
 - {name: "⌇ Social Networks", <<: [*icon-Social, *select, *proxies-adr, *filter-wrp],include-all: true, use: [Provider_01, Provider_02]}
 - {name: "⌇ Google", <<: [*icon-Google, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
