@@ -1,0 +1,125 @@
+mode: Rule
+port: 7890
+profile: {store-selected: true}
+unified-delay: true
+
+proxy-providers:
+  Provider_01:
+    type: http
+    url: "url"                          # ← сюда подставится EN_KEY1
+    interval: 3600
+    proxy: DIRECT
+    path: ./providers/Provider_01.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+  Provider_02:
+    type: http
+    url: "url"                          # ← сюда подставится EN_KEY2
+    interval: 3600
+    proxy: DIRECT
+    path: ./providers/Provider_02.yaml
+    exclude-filter: (?i)(🇳🇵)
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+proxy-anchor:
+  uurl: &uurl {url: 'http://www.gstatic.com/generate_204'}
+  uurltest: &uurltest {interval: 100, tolerance: 50, lazy: false}
+  urltest:  &urltest  {type: url-test, <<: [*uurltest, *uurl]}
+  select:   &select   {type: select,   <<: [*uurltest, *uurl]}
+  balance:  &balance  {type: load-balance, <<: [*uurltest, *uurl], strategy: consistent-hashing}
+
+  filter-rus: &filter-rus {filter: "(?i)🇷🇺"}
+  filter-uae: &filter-uae {filter: "(?i)🇦🇪"}
+  filter-wrp: &filter-wrp {filter: "(?i)🇳🇵"}
+  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵"}
+  filter-usa: &filter-usa {filter: "(?i)🇺🇸|🇳🇵"}
+  filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮"}
+  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
+
+  proxies-di:  &proxies-di  {proxies: [Direct]}
+  proxies-fb:  &proxies-fb  {proxies: [⁖ Automatic, Direct]}
+  proxies-ad:  &proxies-ad  {proxies: [⁖ Automatic, Direct, Europe, USA]}
+  proxies-adr: &proxies-adr {proxies: [⁖ Automatic, Direct, Europe, USA, Russia]}
+  proxies-dar: &proxies-dar {proxies: [Direct, ⁖ Automatic, Europe, USA, Russia]}
+
+  icon-Automatic: &icon-Automatic {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png}
+  icon-Fallback: &icon-Fallback {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png}
+  icon-AntiMAX: &icon-AntiMAX {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Rocket.png}
+  icon-Russia: &icon-Russia {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Russia.png}
+  icon-Europe: &icon-Europe {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/European_Union.png}
+  icon-USA: &icon-USA {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png}
+  icon-UAE: &icon-UAE {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/United-Arab-Emirates.png}
+  icon-Microsoft: &icon-Microsoft {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Microsoft.png}
+  icon-Speedtest: &icon-Speedtest {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Speedtest.png}
+  icon-Social: &icon-Social {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Discord.png}
+  icon-Google: &icon-Google {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png}
+  icon-YouTube: &icon-YouTube {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/YouTube.png}
+  icon-Netflix: &icon-Netflix {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Netflix.png}
+  icon-Stream: &icon-Stream {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Infuse.png}
+  icon-Games: &icon-Games {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/PlayStation_1.png}
+  icon-BattleNet: &icon-BattleNet {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/battlenet.png}
+  icon-Stocks: &icon-Stocks {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/Bitcoin_Icon.png}
+  icon-OpenAi: &icon-OpenAi {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/Ai.png}
+  icon-FFFUUUUU: &icon-FFFUUUUU {icon: https://zbs.ninja/ibyfsk7c2dat/IconSet/FFFUUUUU.png}
+  icon-AdBlock: &icon-AdBlock {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Pirate_Nation.png}
+  icon-Direct: &icon-Direct {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png}
+  icon-Block: &icon-Block {icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Reject.png}
+  icon-Puzzle: &icon-Puzzle {icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Puzzle.png}
+
+proxy-groups:
+- {name: "Direct", <<: *icon-Direct, type: select, hidden: true, udp: true, proxies: [DIRECT]}
+- {name: "Block",  <<: *icon-Block,  type: select, hidden: true, proxies: [REJECT]}
+- {name: QUIC, type: select, proxies: [PASS, REJECT]}
+
+- {name: "Moscow", <<: [*icon-Russia, *select, *filter-rus], hidden: true, include-all: true, use: [Provider_01, Provider_02]}
+
+- {name: "⁖ Automatic", <<: [*icon-Automatic, *urltest, *filter-all], include-all: true, use: [Provider_01, Provider_02]}
+
+- {name: "AntiMAX", <<: [*icon-AntiMAX, *urltest, *filter-all], include-all: true, use: [Provider_01, Provider_02]}
+
+- {name: "Russia", <<: [*icon-Russia, *select,  *filter-rus], include-all: true, proxies: [Direct], use: [Provider_01, Provider_02]}
+- {name: "Europe", <<: [*icon-Europe, *balance, *filter-eur], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], include-all: true, use: [Provider_01, Provider_02]}
+
+- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-ad, *filter-wrp], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Social Networks", <<: [*icon-Social, *select, *proxies-adr, *filter-wrp],include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Google", <<: [*icon-Google, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ YouTube", <<: [*icon-YouTube, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Netflix", <<: [*icon-Netflix, *select, *proxies-ad, *filter-wrp], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Stream", <<: [*icon-Stream, *select, *proxies-dar, *filter-ruw], include-all-proxies: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Games", <<: [*icon-Games, *select, *proxies-dar, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Battle.net", <<: [*icon-BattleNet, *select, *proxies-dar, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Voice Ports", <<: [*icon-Puzzle, *select, *proxies-dar, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ Stocks", <<: [*icon-Stocks, *select, *proxies-dar, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ OpenAi", <<: [*icon-OpenAi, *select, *proxies-ad, *filter-wrp], include-all: true, use: [Provider_01, Provider_02]}
+- {name: "⌇ FFFUUUUU", <<: [*icon-FFFUUUUU, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02]}
+
+- {name: "⠆ AdBlock", <<: *icon-AdBlock, type: select, proxies: [Block, ⁖ Automatic, Direct]}
+
+- {name: "GLOBAL", type: select, udp: true, include-all: true, exclude-filter: "(?i)Direct|Reject", proxies: [⁖ Automatic], use: [Provider_01, Provider_02]}
+- {name: "⠇ Fallback", <<: [*icon-Fallback, *proxies-fb], type: fallback}
+
+rule-universal-definition:
+  universal-config: &universal {type: http, interval: 86400}
+  domain: &domain {behavior: domain, format: yaml, <<: *universal}
+  domain_mrs: &domain_mrs {behavior: domain, format: mrs, <<: *universal}
+  ipcidr: &ipcidr {behavior: ipcidr, format: yaml, <<: *universal}
+  classical: &classical {behavior: classical, format: yaml, <<: *universal}
+  yaml: &yaml {behavior: domain, format: yaml, <<: *universal}
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+
+geox-url:
+  geosite: "https://github.com/jameszeroX/zkeen-domains/releases/latest/download/zkeen.dat"
+  geoip: "https://github.com/jameszeroX/zkeen-ip/releases/latest/download/zkeenip.dat"
+  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+
