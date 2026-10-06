@@ -6,10 +6,11 @@ unified-delay: true
 proxy-providers:
   Provider_01:
     type: http
-    url: "url"                          # ← сюда подставится EN_KEY1
+    url: "url"
     interval: 3600
     proxy: DIRECT
     path: ./providers/Provider_01.yaml
+    exclude-filter: (?i)(🇳🇵)
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -17,11 +18,10 @@ proxy-providers:
 
   Provider_02:
     type: http
-    url: "url"                          # ← сюда подставится EN_KEY2
+    url: "url"
     interval: 3600
     proxy: DIRECT
     path: ./providers/Provider_02.yaml
-    exclude-filter: (?i)(🇳🇵)
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
