@@ -7,11 +7,13 @@ proxy-anchor:
 
   filter-rus: &filter-rus {filter: "(?i)🇷🇺"}
   filter-uae: &filter-uae {filter: "(?i)🇦🇪"}
-  filter-wrp: &filter-wrp {filter: "(?i)🇳🇵"}
-  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵"}
+  filter-wrp: &filter-wrp {filter: "(?i)🇳🇵|🏴‍☠️"}
+  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵|🏴‍☠️"}
   filter-usa: &filter-usa {filter: "(?i)🇺🇸|🇳🇵"}
   filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮"}
-  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
+  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵|🏴‍☠️"}
+
+  filter-all: &filter-aut {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
 
   proxies-di:  &proxies-di  {proxies: [Direct]}
   proxies-fb:  &proxies-fb  {proxies: [⁖ Automatic, Direct]}
@@ -50,7 +52,7 @@ proxy-groups:
 
 - {name: "Moscow", <<: [*icon-Russia, *select, *filter-rus], hidden: true, include-all: true}
 
-- {name: "⁖ Automatic", <<: [*icon-Automatic, *urltest, *filter-all], include-all: true}
+- {name: "⁖ Automatic", <<: [*icon-Automatic, *urltest, *filter-aut], include-all: true}
 
 - {name: "AntiMAX", <<: [*icon-AntiMAX, *urltest, *filter-all], include-all: true}
 
@@ -58,7 +60,7 @@ proxy-groups:
 - {name: "Europe", <<: [*icon-Europe, *balance, *filter-eur], include-all: true}
 - {name: "USA",    <<: [*icon-USA,    *balance, *filter-usa], include-all: true}
 
-- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-adr, *filter-ruw], include-all: true, use: [Provider_01, Provider_02, Provider_03]}
+- {name: "⌇ Speedtest", <<: [*icon-Speedtest, *select, *proxies-adr, *filter-ruw], include-all: true}
 - {name: "⌇ Microsoft", <<: [*icon-Microsoft, *select,  *proxies-dar], include-all: true}
 - {name: "⌇ Social Networks", <<: [*icon-Social, *select, *proxies-adr, *filter-wrp],include-all: true}
 - {name: "⌇ Google", <<: [*icon-Google, *select, *proxies-adr, *filter-ruw], include-all: true}
