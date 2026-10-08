@@ -365,6 +365,7 @@ rules:
 - RULE-SET,speedtest,⌇ Speedtest
 - RULE-SET,ookla-speedtest,⌇ Speedtest
 - DOMAIN-REGEX,.*speedtest.*,⌇ Speedtest
+- DOMAIN-REGEX,.*stest.*,⌇ Speedtest
 
 
 #- GEOIP,RU,DIRECT
