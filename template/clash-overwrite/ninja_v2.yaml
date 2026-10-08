@@ -7,11 +7,11 @@ proxy-anchor:
 
   filter-rus: &filter-rus {filter: "(?i)🇷🇺"}
   filter-uae: &filter-uae {filter: "(?i)🇦🇪"}
-  filter-wrp: &filter-wrp {filter: "(?i)🇳🇵|🏴‍☠️"}
-  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵|🏴‍☠️"}
+  filter-wrp: &filter-wrp {filter: "(?i)🇳🇵|warp"}
+  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵|warp"}
   filter-usa: &filter-usa {filter: "(?i)🇺🇸|🇳🇵"}
   filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮"}
-  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵|🏴‍☠️"}
+  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵|warp"}
 
   filter-aut: &filter-aut {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
 
