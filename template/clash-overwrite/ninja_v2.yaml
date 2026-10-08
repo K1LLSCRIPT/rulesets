@@ -339,46 +339,9 @@ rules:
 # Blocked in rf
 - RULE-SET,blocked_in_rf,⁖ Automatic
 
-#- GEOIP,RU,DIRECT
-- GEOIP,RU,Russia
-- RULE-SET,geoip-ru,Russia
-#,no-resolve
-- RULE-SET,category-gov-ru,Russia
-- RULE-SET,category-ru,Russia
+###
 
-- DOMAIN-KEYWORD,alfacrm,Russia
-- DOMAIN-KEYWORD,shakasports,Russia
-- DOMAIN-KEYWORD,letovokids,Russia
-
-- DOMAIN-KEYWORD,apple,Russia
-- DOMAIN-KEYWORD,avito,Russia
-- DOMAIN-KEYWORD,indels,Russia
-- DOMAIN-KEYWORD,yandex,Russia
-- DOMAIN-KEYWORD,icloud,Russia
-- DOMAIN-KEYWORD,reddit,Russia
-- DOMAIN-KEYWORD,noytech,Russia
-- DOMAIN-KEYWORD,anydesk,Russia
-- DOMAIN-KEYWORD,ntvplus,Russia
-- DOMAIN-KEYWORD,keenetic,Russia
-- DOMAIN-KEYWORD,lgwebostv,Russia
-- DOMAIN-KEYWORD,argotunnel,Russia
-- DOMAIN-KEYWORD,onetwotrip,Russia
-- DOMAIN-KEYWORD,amediateka,Russia
-
-- DOMAIN-REGEX,.*ivi.*,Russia
-- DOMAIN-REGEX,.*wink.*,Russia
-- DOMAIN-REGEX,.*24.*.tv,Russia
-- DOMAIN-REGEX,.*imshop.*,Russia
-- DOMAIN-REGEX,.*ngenix.*,Russia
-- DOMAIN-REGEX,.*kartina.*,Russia
-- DOMAIN-REGEX,.*okko.*.tv,Russia
-- DOMAIN-REGEX,.*samsung.*,Russia
-- DOMAIN-REGEX,.*lge.*.com,Russia
-- DOMAIN-REGEX,.*ssl-stat.*,Russia
-- DOMAIN-REGEX,.*jumpdesktop.*,Russia
-- DOMAIN-REGEX,.*teleport.*.media,Russia
-- DOMAIN-REGEX,.*restream-media.*,Russia
-
+###
 
 # Microsoft
 - RULE-SET,microsoft,⌇ Microsoft
@@ -482,6 +445,46 @@ rules:
 
 # AdBlock
 - RULE-SET,category-ads-all,⠆ AdBlock
+
+#- GEOIP,RU,DIRECT
+- GEOIP,RU,Russia
+- RULE-SET,geoip-ru,Russia
+#,no-resolve
+- RULE-SET,category-gov-ru,Russia
+- RULE-SET,category-ru,Russia
+
+- DOMAIN-KEYWORD,alfacrm,Russia
+- DOMAIN-KEYWORD,shakasports,Russia
+- DOMAIN-KEYWORD,letovokids,Russia
+
+- DOMAIN-KEYWORD,apple,Russia
+- DOMAIN-KEYWORD,avito,Russia
+- DOMAIN-KEYWORD,indels,Russia
+- DOMAIN-KEYWORD,yandex,Russia
+- DOMAIN-KEYWORD,icloud,Russia
+- DOMAIN-KEYWORD,reddit,Russia
+- DOMAIN-KEYWORD,noytech,Russia
+- DOMAIN-KEYWORD,anydesk,Russia
+- DOMAIN-KEYWORD,ntvplus,Russia
+- DOMAIN-KEYWORD,keenetic,Russia
+- DOMAIN-KEYWORD,lgwebostv,Russia
+- DOMAIN-KEYWORD,argotunnel,Russia
+- DOMAIN-KEYWORD,onetwotrip,Russia
+- DOMAIN-KEYWORD,amediateka,Russia
+
+- DOMAIN-REGEX,.*ivi.*,Russia
+- DOMAIN-REGEX,.*wink.*,Russia
+- DOMAIN-REGEX,.*24.*.tv,Russia
+- DOMAIN-REGEX,.*imshop.*,Russia
+- DOMAIN-REGEX,.*ngenix.*,Russia
+- DOMAIN-REGEX,.*kartina.*,Russia
+- DOMAIN-REGEX,.*okko.*.tv,Russia
+- DOMAIN-REGEX,.*samsung.*,Russia
+- DOMAIN-REGEX,.*lge.*.com,Russia
+- DOMAIN-REGEX,.*ssl-stat.*,Russia
+- DOMAIN-REGEX,.*jumpdesktop.*,Russia
+- DOMAIN-REGEX,.*teleport.*.media,Russia
+- DOMAIN-REGEX,.*restream-media.*,Russia
 
 # FINAL
 - MATCH,⠇ Fallback
