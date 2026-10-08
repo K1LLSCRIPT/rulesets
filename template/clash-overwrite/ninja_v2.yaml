@@ -13,7 +13,7 @@ proxy-anchor:
   filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮"}
   filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵|🏴‍☠️"}
 
-  filter-all: &filter-aut {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
+  filter-aut: &filter-aut {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇦🇪|🇳🇵"}
 
   proxies-di:  &proxies-di  {proxies: [Direct]}
   proxies-fb:  &proxies-fb  {proxies: [⁖ Automatic, Direct]}
