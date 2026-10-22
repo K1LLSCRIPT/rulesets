@@ -273,6 +273,7 @@ rules:
 - DOMAIN-REGEX,.*2ip.*.ru,Direct
 #- DOMAIN-REGEX,.*2ip.*.io,🚀 Select
 - DOMAIN-REGEX,.*2ip.*.io,⁖ Automatic
+- DOMAIN-REGEX,.*ip.*.sb,⁖ Automatic
 
 # Private
 - RULE-SET,geoip-private,Direct
