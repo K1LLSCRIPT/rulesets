@@ -274,7 +274,7 @@ rules:
 #- DOMAIN-REGEX,.*2ip.*.io,🚀 Select
 - DOMAIN-REGEX,.*2ip.*.io,⁖ Automatic
 - DOMAIN-REGEX,.*ip.*.sb,⁖ Automatic
-#- DOMAIN-REGEX,.*ipwho.*,⁖ Automatic
+- DOMAIN-REGEX,.*ipwho.*,DIRECT
 
 # Private
 - RULE-SET,geoip-private,Direct
