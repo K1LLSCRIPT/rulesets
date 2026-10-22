@@ -317,11 +317,11 @@ rules:
 - RULE-SET,geoip-private,Direct
 #,no-resolve
 - RULE-SET,private,Direct
-- DOMAIN-REGEX,.*syng.*,Direct
+#- DOMAIN-REGEX,.*syng.*,Direct
 #- DOMAIN-REGEX,.*nginx.*,Direct
 #- DOMAIN-REGEX,.*eee.bi.*,Direct
 #- DOMAIN-REGEX,.*darkvpn.*,Direct
-- DOMAIN-REGEX,.*zbs.*.ninja,Direct
+#- DOMAIN-REGEX,.*zbs.*.ninja,Direct
 - DOMAIN-REGEX,.*vlessvova.*.ru,Direct
 - DOMAIN-REGEX,.*dynamo.*.vision,Direct
 - DOMAIN-REGEX,.*beardman.*.trade,Direct
