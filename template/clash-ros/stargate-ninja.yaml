@@ -113,10 +113,10 @@ proxy-anchor:
   filter-rus: &filter-rus {filter: "(?i)🇷🇺"}
   filter-uae: &filter-uae {filter: "(?i)🇦🇪"}
   filter-wrp: &filter-wrp {filter: "(?i)🇳🇵"}
-  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺|🇳🇵"}
-  filter-usa: &filter-usa {filter: "(?i)🇺🇸|🇳🇵"}
+  filter-ruw: &filter-ruw {filter: "(?i)🇷🇺"}
+  filter-usa: &filter-usa {filter: "(?i)🇺🇸"}
   filter-eur: &filter-eur {filter: "(?i)🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇵🇱"}
-  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇵🇱|🇦🇪|🇳🇵"}
+  filter-all: &filter-all {filter: "(?i)🇺🇸|🇳🇱|🇨🇭|🇩🇪|🇱🇻|🇪🇪|🇫🇮|🇵🇱|🇦🇪"}
 
   proxies-di:  &proxies-di  {proxies: [Direct]}
   proxies-fb:  &proxies-fb  {proxies: [⁖ Automatic, Direct]}
